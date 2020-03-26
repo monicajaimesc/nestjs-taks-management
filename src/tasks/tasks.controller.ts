@@ -1,18 +1,24 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task } from './task.model';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 
 @Controller('tasks')
 export class TasksController {
     // inject the service into the controller
-    constructor(private taskService: TasksService) {}
+    constructor(private tasksService: TasksService) {}
 
     @Get()
     // get method that will return all tasks to the client
     getAllTasks(): Task[] {
     // call the service and get the array of tasks
-      return this.taskService.getAllTasks();
+      return this.tasksService.getAllTasks();
+    }
+
+    @Get('/id')
+    getTaskById(@Param('id': string) {
+
     }
 
     /*
@@ -28,14 +34,16 @@ export class TasksController {
     extract
     */
     @Post()
-    createTask(
-      @Body('title') title: string,
-      @Body('description') description: string,
-    ): Task {
+    createTask(@Body() createTaskDto: CreateTaskDto): Task {
       // get the new desk and return it back to the client
-      return this.taskService.createTask(title, description);
+      return this.tasksService.createTask(createTaskDto);
 
     }
+
+    
+    // name(parameters): return 
+    getTaskById(id: string): task {
+      return this.tasks.find(Task => tasks.id === id);
 
 
 }

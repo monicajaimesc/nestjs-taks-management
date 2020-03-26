@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 import * as uuid from 'uuid/v1';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
-    // service is going to store[] those tasks in memory
+    // service is going to store[] tTask[]) =>hose tasks in memory
     // tasks property of this class
     private tasks: Task[] = [];
 // the contoller need to have acces to the property,
@@ -13,12 +14,16 @@ export class TasksService {
         // return the array
         return this.tasks; 
     }
-    createTask(tittle: string, description: string): Task {
+
+
+    }
+    createTask(createTaskDto: CreateTaskDto): Task {
+        const { title, description } = createTaskDto;
         const task: Task = {
             id: uuid(),
             // tittle is the key and the value
             // same like tittle: tittle,
-            tittle,
+            title,
             description, 
             status: TaskStatus.OPEN,
         };
