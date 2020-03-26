@@ -18,9 +18,16 @@ export class TasksService {
      // name(parameters): return type
     getTaskById(id: string): Task {
         return this.tasks.find(task => task.id === id);
-
-
     }
+
+    deteleTaskById(id: string): void {
+        // if the filter return false, that array will put out of the array
+        // return false just for the task'id that i want to delete
+        this.tasks = this.tasks.filter(task => task.id !==id)
+         
+    }
+    
+
     createTask(createTaskDto: CreateTaskDto): Task {
         const { title, description } = createTaskDto;
         const task: Task = {
