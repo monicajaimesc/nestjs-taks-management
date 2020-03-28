@@ -53,7 +53,9 @@ export class TasksService {
     deteleTaskById(id: string): void {
         // if the filter return false, that array will put out of the array
         // return false just for the task'id that i want to delete
-        this.tasks = this.tasks.filter(task => task.id !==id)
+        const found = this.getTaskById(id);
+        // at this point looping the array twice with find and filter method
+        this.tasks = this.tasks.filter(task => task.id !== found.id)
          
     }
     
